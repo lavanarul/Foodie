@@ -30,6 +30,7 @@
 
 
             <TextView
+                android:textColor="@color/colorAccent"
                 android:textStyle="bold"
                 android:id="@+id/item_name"
                 android:layout_width="match_parent"
@@ -37,6 +38,7 @@
                 android:textSize="@dimen/textMedium" />
 
             <TextView
+                android:textColor="@color/colorAccent"
                 android:textStyle="bold"
                 android:id="@+id/item_price"
                 android:layout_width="match_parent"
