@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">Foodie</string>
+    <string name="error">Error</string>
+    <string name="check_network">Please check your network connection</string>
+    <string name="home">Home</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="string1">1.Bunch of fresh container</string>
+    <string name="string2">2.Cloves of Garlic</string>
+    <string name="string3">3.Whole trout</string>
+    <string name="order_now">Order Now</string>
+    <string name="food_item">food_item</string>
+    <string name="my_cart">My Cart</string>
+    <string name="dots">----------------------------------------</string>
+    <string name="tot_amount">Total Amount</string>
+    <string name="delivery">Delivery Charges</string>
+    <string name="apply">Apply</string>
+    <string name="enter_coupon">Enter Coupon Code</string>
+    <string name="discount">(20% discount applicable, if total amount is more than 400)</string>
+    <string name="or">OR</string>
+    <string name="delivery_charge">(free delivery charge, if total amount is more than 100)</string>
+    <string name="continue_text">Continue</string>
+    <string name="grant">Grand Total</string>
+    <string name="F22LABS">F22LABS</string>
+    <string name="FREEDEL">FREEDEL</string>
+    <string name="view_cart">View Cart</string>
+    <string name="coupon_applied">Coupon Applied!</string>
+    <string name="cart_empty">Cart is empty</string>
+    <string name="low">\"Price Low - High\"</string>
+    <string name="rating">\"Rating\"</string>
+    <string name="filter">\"Filter\"</string>
+    <string name="please_wait">\"Please wait...\"</string>
+</resources>
