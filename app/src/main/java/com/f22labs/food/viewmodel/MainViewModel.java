@@ -1,12 +1,14 @@
 package com.f22labs.food.viewmodel;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
-import android.util.Log;
 import android.view.View;
 
+import com.f22labs.food.BR;
+import com.f22labs.food.R;
 import com.f22labs.food.model.Food;
 import com.f22labs.food.remote.FoodFactory;
 import com.f22labs.food.remote.FoodService;
@@ -24,16 +26,15 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainViewModel extends BaseObservable {
+    private List<Food> foodList;
+    private Context context;
+    private int totalCount;
+    private ProgressDialog progressDialog;
 
     @Bindable
     public List<Food> getFoodList() {
         return foodList;
     }
-
-
-    private List<Food> foodList;
-    private Context context;
-    private int totalCount;
 
 
     public void onCartClick(View view) {
@@ -44,11 +45,13 @@ public class MainViewModel extends BaseObservable {
     public MainViewModel(Context context) {
         this.context = context;
         foodList = new ArrayList<>();
-        cartItemAdapter = new HomeItemAdapter();
+        cartItemAdapter = new HomeItemAdapter(this);
+        progressDialog=new ProgressDialog(context);
+        progressDialog.setCancelable(false);
+        progressDialog.setMessage(context.getString(R.string.please_wait));
+        progressDialog.setCanceledOnTouchOutside(false);
 
     }
-
-
 
     @Bindable
     public HomeItemAdapter getHomeAdapter() {
@@ -68,6 +71,7 @@ public class MainViewModel extends BaseObservable {
 
 
     private void loadFoodItems() {
+        progressDialog.show();
         foodList = new ArrayList<>();
         FoodService apiInterface = FoodFactory.getClient().create(FoodService.class);
         Call<List<Food>> callLogin = apiInterface.getFoodItemList();
@@ -77,15 +81,14 @@ public class MainViewModel extends BaseObservable {
                 if (response.isSuccessful()) {
                     foodList.addAll(response.body());
                     dbSetFoodItems();
-
-
-                } else {
-
+                    progressDialog.dismiss();
                 }
+
             }
 
             @Override
             public void onFailure(Call<List<Food>> call, Throwable t) {
+                progressDialog.dismiss();
                 call.cancel();
 
             }
@@ -144,10 +147,16 @@ public class MainViewModel extends BaseObservable {
 
     @Bindable
     public String getTotalCount() {
-        totalCount=0;
+        totalCount = 0;
         for (Food food : foodList) {
             totalCount += food.quantity;
         }
         return String.valueOf(totalCount);
+    }
+
+    void setFoodList(Food food, int position) {
+        foodList.set(position, food);
+        notifyPropertyChanged(BR.totalCount);
+        notifyPropertyChanged(BR.bottomVisibility);
     }
 }

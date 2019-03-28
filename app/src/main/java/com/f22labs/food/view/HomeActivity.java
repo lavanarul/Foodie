@@ -43,7 +43,7 @@ public class HomeActivity extends AppCompatActivity {
                 false);
 
         itemRecycler.setLayoutManager(linearLayoutManager);
-        HomeItemAdapter homeItemAdapter = new HomeItemAdapter();
+        HomeItemAdapter homeItemAdapter = new HomeItemAdapter(mainViewModel);
         itemRecycler.setAdapter(homeItemAdapter);
 
     }

@@ -12,6 +12,7 @@ import com.f22labs.food.R;
 import com.f22labs.food.databinding.ItemBinding;
 import com.f22labs.food.model.Food;
 import com.f22labs.food.viewmodel.FoodViewModel;
+import com.f22labs.food.viewmodel.MainViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +22,10 @@ public class HomeItemAdapter extends Adapter<HomeItemAdapter.ViewHolder> {
 
     private List<Food> foodItemList;
     private LayoutInflater layoutInflater;
+    MainViewModel mainViewModel;
 
-    public HomeItemAdapter() {
+    public HomeItemAdapter(MainViewModel mainViewModel) {
+        this.mainViewModel=mainViewModel;
         this.foodItemList = new ArrayList<>();
     }
 
@@ -46,7 +49,7 @@ public class HomeItemAdapter extends Adapter<HomeItemAdapter.ViewHolder> {
         void bindFood(Food food) {
             if (binding.getFoodBinding() == null) {
                 binding.setFoodBinding(
-                        new FoodViewModel(itemView.getContext(), food));
+                        new FoodViewModel(itemView.getContext(), food,mainViewModel,getAdapterPosition()));
             } else {
                 binding.getFoodBinding().setFood(food);
             }

@@ -27,8 +27,8 @@ public interface FoodDao {
     @Query("UPDATE food SET quantity = :quantity WHERE itemName = :foodDB")
     void update(String foodDB,int quantity);
 
-    @Delete
-    void delete(Food foodDB);
+    @Query("DELETE FROM food WHERE itemName = :itemName")
+    void delete(String itemName);
 
     @Delete
     void delete(Food... foodDB);

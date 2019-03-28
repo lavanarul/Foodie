@@ -7,13 +7,12 @@ import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 import android.databinding.BindingAdapter;
 import android.os.Parcelable;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.android.databinding.library.baseAdapters.BR;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.f22labs.food.Listeners.LoadTotal;
 import com.f22labs.food.R;
 import com.f22labs.food.model.Food;
 import com.f22labs.food.room.FoodDatabase;
@@ -24,10 +23,14 @@ public class FoodViewModel extends BaseObservable {
     private Food food;
     private Context context;
     private FoodDatabase foodDatabase;
+    private MainViewModel mainViewModel;
+    private int position;
 
-    public FoodViewModel(Context context, Food food) {
+    public FoodViewModel(Context context, Food food, MainViewModel mainViewModel, int position) {
         this.food = food;
         this.context = context;
+        this.mainViewModel = mainViewModel;
+        this.position = position;
         foodDatabase = FoodDatabase.getInstance(context);
     }
 
@@ -72,6 +75,7 @@ public class FoodViewModel extends BaseObservable {
             food.setQuantity(textCount);
             foodDatabase.upSert(food);
             notifyChange();
+            mainViewModel.setFoodList(food, position);
 
         }
     }
@@ -88,9 +92,19 @@ public class FoodViewModel extends BaseObservable {
         if (textCount > 0) {
             textCount--;
             food.setQuantity(textCount);
-            foodDatabase.upSert(food);
-            notifyChange();
+            if (food.getQuantity() > 0)
+                foodDatabase.upSert(food);
+            else {
+                Log.e("--->","Delete");
+                foodDatabase.getFoodDao().delete(food.getItemName());
+            }
         }
+        else
+            foodDatabase.getFoodDao().delete(food.getItemName());
+
+
+        notifyChange();
+        mainViewModel.setFoodList(food, position);
     }
 
 
@@ -99,10 +113,5 @@ public class FoodViewModel extends BaseObservable {
         notifyChange();
     }
 
-    private LoadTotal onLoadTotal;
-
-    public void setOnLoadTotal(LoadTotal onLoadTotal) {
-        this.onLoadTotal = onLoadTotal;
-    }
 
 }

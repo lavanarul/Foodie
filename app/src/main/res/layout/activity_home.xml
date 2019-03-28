@@ -81,6 +81,7 @@
            android:layout_marginLeft="5dp"
            android:layout_toRightOf="@id/dot"
            android:textSize="@dimen/textMedium"
+
            android:textStyle="bold"
            android:text="@{food.totalCount}"
            android:layout_centerHorizontal="true"

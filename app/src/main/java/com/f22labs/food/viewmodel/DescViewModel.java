@@ -10,7 +10,6 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.f22labs.food.Listeners.LoadTotal;
 import com.f22labs.food.model.Food;
 import com.f22labs.food.room.FoodDatabase;
 

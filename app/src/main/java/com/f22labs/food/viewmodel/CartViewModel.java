@@ -12,7 +12,6 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.f22labs.food.Listeners.LoadTotal;
 import com.f22labs.food.R;
 import com.f22labs.food.model.Food;
 import com.f22labs.food.room.FoodDatabase;
@@ -79,7 +78,7 @@ public class CartViewModel extends BaseObservable {
 
     @Bindable
     public String getTotalPrice() {
-        return String.valueOf(food.itemPrice*food.quantity);
+        return String.valueOf(food.itemPrice * food.quantity);
     }
 
     @Bindable
@@ -104,10 +103,5 @@ public class CartViewModel extends BaseObservable {
         notifyChange();
     }
 
-    private LoadTotal onLoadTotal;
-
-    public void setOnLoadTotal(LoadTotal onLoadTotal) {
-        this.onLoadTotal = onLoadTotal;
-    }
 
 }
