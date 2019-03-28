@@ -1,14 +1,17 @@
-package com.f22labs.food.Models;
+package com.f22labs.food.model;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+import android.databinding.Bindable;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+@Entity
+public class Food implements Parcelable {
 
-public class FoodItemModel implements Parcelable {
-
-    public FoodItemModel(Double averageRating, String imageUrl, String itemName, Float itemPrice, int quantity) {
+    public Food(Double averageRating, String imageUrl, String itemName, Float itemPrice, int quantity) {
         this.averageRating = averageRating;
         this.imageUrl = imageUrl;
         this.itemName = itemName;
@@ -18,18 +21,20 @@ public class FoodItemModel implements Parcelable {
 
     @SerializedName("average_rating")
     @Expose
-    private Double averageRating;
+    public Double averageRating;
     @SerializedName("image_url")
     @Expose
-    private String imageUrl;
+    public String imageUrl;
     @SerializedName("item_name")
     @Expose
-    private String itemName;
+    public String itemName;
     @SerializedName("item_price")
     @Expose
-    private Float itemPrice;
+    public Float itemPrice;
+    @PrimaryKey(autoGenerate = true)
+    private int foodId;
 
-    protected FoodItemModel(Parcel in) {
+    protected Food(Parcel in) {
         if (in.readByte() == 0) {
             averageRating = null;
         } else {
@@ -45,7 +50,7 @@ public class FoodItemModel implements Parcelable {
         quantity = in.readInt();
     }
 
-    public FoodItemModel() {
+    public Food() {
 
     }
 
@@ -73,15 +78,15 @@ public class FoodItemModel implements Parcelable {
         return 0;
     }
 
-    public static final Creator<FoodItemModel> CREATOR = new Creator<FoodItemModel>() {
+    public static final Creator<Food> CREATOR = new Creator<Food>() {
         @Override
-        public FoodItemModel createFromParcel(Parcel in) {
-            return new FoodItemModel(in);
+        public Food createFromParcel(Parcel in) {
+            return new Food(in);
         }
 
         @Override
-        public FoodItemModel[] newArray(int size) {
-            return new FoodItemModel[size];
+        public Food[] newArray(int size) {
+            return new Food[size];
         }
     };
 
@@ -125,7 +130,14 @@ public class FoodItemModel implements Parcelable {
         this.quantity = quantity;
     }
 
-    private int quantity;
+    public int quantity;
 
 
+    public int getFoodId() {
+        return foodId;
+    }
+
+    public void setFoodId(int foodId) {
+        this.foodId = foodId;
+    }
 }

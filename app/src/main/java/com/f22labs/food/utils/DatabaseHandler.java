@@ -1,4 +1,4 @@
-package com.f22labs.food.Utils;
+package com.f22labs.food.utils;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -7,7 +7,7 @@ import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.f22labs.food.Models.FoodItemModel;
+import com.f22labs.food.model.Food;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +46,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void addFoodItem(FoodItemModel foodItemModel) {
+    public void addFoodItem(Food foodItemModel) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -73,15 +73,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
 
-    public List<FoodItemModel> getAllFoodItems() {
-        List<FoodItemModel> contactList = new ArrayList<FoodItemModel>();
+    public List<Food> getAllFoodItems() {
+        List<Food> contactList = new ArrayList<Food>();
         String selectQuery = "SELECT  * FROM " + TABLE_CONTACTS;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
         if (cursor.moveToFirst()) {
             do {
-                FoodItemModel contact = new FoodItemModel();
+                Food contact = new Food();
                 contact.setItemName(cursor.getString(1));
                 contact.setAverageRating(Double.valueOf(cursor.getString(2)));
                 contact.setImageUrl(cursor.getString(3));
@@ -94,7 +94,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return contactList;
     }
 
-    public int updateContact(FoodItemModel contact) {
+    public int updateContact(Food contact) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(KEY_QNTY, contact.getQuantity());
@@ -102,7 +102,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 new String[]{String.valueOf(contact.getItemName())});
     }
 
-    public void deleteFoodItem(FoodItemModel contact) {
+    public void deleteFoodItem(Food contact) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_CONTACTS, KEY_NAME + " = ?",
                 new String[]{String.valueOf(contact.getItemName())});

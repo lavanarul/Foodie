@@ -1,4 +1,4 @@
-package com.f22labs.food.Utils;
+package com.f22labs.food.utils;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

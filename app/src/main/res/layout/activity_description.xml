@@ -1,180 +1,196 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".Activities.HomeActivity">
+<layout>
 
+    <data>
 
-    <RelativeLayout
+        <variable
+            name="desc"
+            type="com.f22labs.food.viewmodel.DescViewModel" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1">
+        android:orientation="vertical"
+        tools:context=".view.HomeActivity">
 
-        <ImageView
-            android:scaleType="centerCrop"
-            android:id="@+id/item_image"
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_weight="1">
 
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginLeft="20dp"
-            android:layout_marginBottom="20dp"
-            android:orientation="vertical">
-
-
-            <TextView
-                android:textColor="@color/colorAccent"
-                android:textStyle="bold"
-                android:id="@+id/item_name"
+            <ImageView
+                imageUrl="@{desc.imageUrl}"
+                android:id="@+id/item_image"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/textMedium" />
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop" />
 
-            <TextView
-                android:textColor="@color/colorAccent"
-                android:textStyle="bold"
-                android:id="@+id/item_price"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp" />
 
-            <RatingBar
-                android:id="@+id/item_rating"
-                style="?android:attr/ratingBarStyleSmall"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:clickable="false" />
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="20dp"
+                android:orientation="vertical">
 
 
-        </LinearLayout>
+                <TextView
+                    android:text="@{desc.itemName}"
+                    android:id="@+id/item_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="@dimen/textMedium"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:text="@{String.valueOf(desc.itemPrice)}"
+                    android:id="@+id/item_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/colorAccent"
+                    android:textStyle="bold" />
+
+                <RatingBar
+                    android:rating="@{(float)desc.avgRating}"
+                    android:id="@+id/item_rating"
+                    style="?android:attr/ratingBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:clickable="false" />
 
 
+            </LinearLayout>
 
 
-    </RelativeLayout>
+        </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="10dp"
-        android:layout_weight="1"
-        android:orientation="vertical">
-
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@string/ingredients"
-                android:textSize="@dimen/textMedium" />
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="8dp"
-                android:text="@string/string1"
-                android:textSize="@dimen/textMedium" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="8dp"
-                android:text="@string/string2"
-                android:textSize="@dimen/textMedium" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="8dp"
-                android:text="@string/string3"
-                android:textSize="@dimen/textMedium" />
-
-
-        </LinearLayout>
-
-
-
-        <TextView
-            android:id="@+id/orderNow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="20dp"
-            android:textStyle="bold"
-            android:textSize="@dimen/textMedium"
-            android:background="@drawable/rounded_bgcolor"
-            android:padding="10dp"
-            android:text="@string/order_now"
-            android:textColor="@color/white" />
-
-        <LinearLayout
-            android:layout_marginBottom="30dp"
-            android:layout_above="@id/orderNow"
-            android:id="@+id/addRemoveLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <ImageButton
-                android:id="@+id/add_item"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ic_add_large" />
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:visibility="visible" />
+                    android:text="@string/ingredients"
+                    android:textSize="@dimen/textMedium" />
+
 
                 <TextView
-                    android:id="@+id/no_item"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginLeft="30dp"
-                    android:textStyle="bold"
-                    android:visibility="gone" />
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/string1"
+                    android:textSize="@dimen/textMedium" />
 
-            </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/string2"
+                    android:textSize="@dimen/textMedium" />
 
-            <ImageButton
-                android:layout_marginLeft="30dp"
-                android:id="@+id/remove_item"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/string3"
+                    android:textSize="@dimen/textMedium" />
+
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/orderNow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/ic_remove_large" />
+                android:layout_alignParentBottom="true"
+                android:onClick="@{desc::onItemClick}"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/rounded_bgcolor"
+                android:padding="10dp"
+                android:text="@string/order_now"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textMedium"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/addRemoveLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/orderNow"
+
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="30dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:onClick="@{desc::onAddItemClick}"
+                    android:id="@+id/add_item"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_add_large" />
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/no_item"
+                        android:text="@{String.valueOf(desc.quantity)}"
+                        android:visibility="@{desc.itemVisibility}"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="30dp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+
+                <ImageButton
+                    android:onClick="@{desc::onRemoveItemClick}"
+                    android:id="@+id/remove_item"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:background="@drawable/ic_remove_large" />
 
 
-        </LinearLayout>
+            </LinearLayout>
 
 
-    </RelativeLayout>
+        </RelativeLayout>
 
 
-</LinearLayout>
+    </LinearLayout>
+</layout>

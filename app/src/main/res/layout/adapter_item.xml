@@ -1,10 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <data class="ItemBinding">
+
+        <variable
+            name="FoodBinding"
+            type="com.f22labs.food.viewmodel.FoodViewModel"/>
+
+    </data>
+
+<RelativeLayout
+    android:id="@+id/itemView"
+    android:onClick="@{FoodBinding::onItemClick}"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    tools:context=".Activities.HomeActivity">
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -40,6 +52,7 @@
 
                     <ImageButton
                         android:id="@+id/add_item"
+                        android:onClick="@{FoodBinding::onAddItemClick}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/ic_add" />
@@ -57,9 +70,10 @@
                         <TextView
                             android:id="@+id/no_item"
                             android:layout_width="wrap_content"
+                            android:text="@{String.valueOf(FoodBinding.quantity)}"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:visibility="gone" />
+                            android:visibility="@{FoodBinding.ItemVisibility, default=gone}"
+                            android:layout_marginTop="8dp" />
 
                     </RelativeLayout>
 
@@ -67,7 +81,9 @@
                         android:id="@+id/remove_item"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:onClick="@{FoodBinding::onRemoveItemClick}"
                         android:layout_marginTop="8dp"
+
                         android:background="@drawable/ic_remove" />
 
 
@@ -86,17 +102,20 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/textMedium"
                         android:id="@+id/item_name"
+                        android:text="@{FoodBinding.itemName}"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
 
                     <TextView
                         android:id="@+id/item_price"
+                        android:text="@{String.valueOf(FoodBinding.itemPrice)}"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp" />
 
                     <RatingBar
                         android:id="@+id/item_rating"
+                        android:rating="@{(float)FoodBinding.avgRating}"
                         style="?android:attr/ratingBarStyleSmall"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -115,6 +134,7 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/item_image"
+        tools:imageUrl="@{FoodBinding.imageUrl}"
         android:layout_width="@dimen/image_size"
         android:layout_height="@dimen/image_size"
         android:layout_centerVertical="true"
@@ -124,3 +144,4 @@
 
 
 </RelativeLayout>
+</layout>

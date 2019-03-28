@@ -1,14 +1,14 @@
-package com.f22labs.food.Network;
+package com.f22labs.food.remote;
 
 
-import com.f22labs.food.Utils.AppConstants;
+import com.f22labs.food.utils.AppConstants;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class RetrofitApiConfig {
+public class FoodFactory {
 
     private static Retrofit retrofit = null;
 
